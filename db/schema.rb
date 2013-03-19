@@ -11,11 +11,22 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130318230810) do
+ActiveRecord::Schema.define(:version => 20130319015326) do
 
   create_table "market_places", :force => true do |t|
     t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.string   "name"
+  end
+
+  add_index "market_places", ["name"], :name => "index_market_places_on_name", :unique => true
+
+  create_table "order_lines", :force => true do |t|
     t.integer  "product_id"
+    t.integer  "qty"
+    t.decimal  "line_total"
+    t.integer  "order_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -32,11 +43,13 @@ ActiveRecord::Schema.define(:version => 20130318230810) do
 
   create_table "products", :force => true do |t|
     t.string   "name"
-    t.decimal  "price",      :precision => 8, :scale => 2
-    t.decimal  "decimal",    :precision => 8, :scale => 2
-    t.datetime "created_at",                               :null => false
-    t.datetime "updated_at",                               :null => false
+    t.decimal  "price",           :precision => 8, :scale => 2
+    t.datetime "created_at",                                    :null => false
+    t.datetime "updated_at",                                    :null => false
+    t.integer  "market_place_id"
   end
+
+  add_index "products", ["name"], :name => "index_products_on_name", :unique => true
 
   create_table "seller_transactions", :force => true do |t|
     t.integer  "order_id"
@@ -54,5 +67,7 @@ ActiveRecord::Schema.define(:version => 20130318230810) do
     t.datetime "updated_at", :null => false
     t.string   "email"
   end
+
+  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
 
 end
