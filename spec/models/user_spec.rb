@@ -16,8 +16,8 @@ describe User do
     subject {@user}
 
     describe "responds to all fields" do
-        it {should respond_to(:name)}
-        it {should respond_to(:email)}
+        # it {should_respond_to(:name, :email)}
+        it {should respond_to(:name, :email, :tax_rate)}
     end
 
     it "should be valid" do

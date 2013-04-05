@@ -10,7 +10,7 @@
 #
 
 class User < ActiveRecord::Base
-  attr_accessible :name, :email
+  attr_accessible :name, :email, :tax_rate
   has_many :market_places
   has_many :products, through: :market_places
   has_many :orders

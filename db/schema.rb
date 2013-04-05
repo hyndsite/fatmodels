@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130319015326) do
+ActiveRecord::Schema.define(:version => 20130405233309) do
 
   create_table "market_places", :force => true do |t|
     t.integer  "user_id"
@@ -54,7 +54,6 @@ ActiveRecord::Schema.define(:version => 20130319015326) do
   create_table "seller_transactions", :force => true do |t|
     t.integer  "order_id"
     t.decimal  "seller_dues", :precision => 8, :scale => 2
-    t.integer  "points"
     t.datetime "created_at",                                :null => false
     t.datetime "updated_at",                                :null => false
   end
@@ -63,9 +62,10 @@ ActiveRecord::Schema.define(:version => 20130319015326) do
 
   create_table "users", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
     t.string   "email"
+    t.decimal  "tax_rate",   :precision => 8, :scale => 2
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
