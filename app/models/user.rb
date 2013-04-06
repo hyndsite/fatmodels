@@ -10,10 +10,11 @@
 #
 
 class User < ActiveRecord::Base
-  attr_accessible :name, :email, :tax_rate
+  attr_accessible :name, :email, :tax_rate, :orders_attributes, :orders
   has_many :market_places
   has_many :products, through: :market_places
-  has_many :orders
+  has_many :orders, inverse_of: :user, autosave: true
+  accepts_nested_attributes_for :orders
 
   VALID_EMAIL_REGEX =/\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :name, presence: true, length: { maximum: 50}
@@ -21,6 +22,7 @@ class User < ActiveRecord::Base
                             uniqueness: {case_sensitive: false}
 
   before_save { |user| user.email = user.email.downcase }
+
 
   def is_buyer?
     orders.present?

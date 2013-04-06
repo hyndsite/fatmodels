@@ -11,10 +11,11 @@
 #
 
 class Order < ActiveRecord::Base
-  attr_accessible :seller_transaction
-  belongs_to :user
-  has_one :seller_transaction
-  has_many :order_lines
+  attr_accessible :seller_transaction, :order_lines_attributes
+  belongs_to :user, inverse_of: :orders
+  has_one :seller_transaction, inverse_of: :order
+  has_many :order_lines, inverse_of: :order, autosave: true, dependent: :destroy
+  accepts_nested_attributes_for :order_lines, allow_destroy: true
 
   validates :user, presence: true
   validates :seller_transaction, presence: true

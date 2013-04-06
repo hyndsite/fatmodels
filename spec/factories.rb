@@ -51,6 +51,5 @@ FactoryGirl.define do
       #seller transaction
       factory :seller_transaction do
         order
-        points {Random.new.rand(1..5)}
       end
 end

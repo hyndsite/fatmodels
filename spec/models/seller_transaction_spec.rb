@@ -23,7 +23,7 @@ describe SellerTransaction do
   subject {@seller_transaction}
 
   describe "responds to" do
-    it {should respond_to(:order, :points, :seller_dues)}
+    it {should respond_to(:order, :seller_dues)}
   end
 
   describe "calculates seller dues correctly" do
