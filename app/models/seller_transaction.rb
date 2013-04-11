@@ -12,6 +12,7 @@
 
 class SellerTransaction < ActiveRecord::Base
   belongs_to :order
+  belongs_to :user
   attr_accessible :order
 
   before_save :calculate_seller_dues
@@ -21,7 +22,8 @@ class SellerTransaction < ActiveRecord::Base
   end
 
   def seller_dues
-    self.seller_dues = (self.order.total * 0.08).round(2)
+    self.seller_dues ||= calculate_seller_dues
+    self.seller_dues
   end
 
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130405233309) do
+ActiveRecord::Schema.define(:version => 20130411212705) do
 
   create_table "market_places", :force => true do |t|
     t.integer  "user_id"
@@ -56,6 +56,7 @@ ActiveRecord::Schema.define(:version => 20130405233309) do
     t.decimal  "seller_dues", :precision => 8, :scale => 2
     t.datetime "created_at",                                :null => false
     t.datetime "updated_at",                                :null => false
+    t.integer  "user_id"
   end
 
   add_index "seller_transactions", ["order_id"], :name => "index_seller_transactions_on_order_id"

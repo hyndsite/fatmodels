@@ -28,19 +28,9 @@ class User < ActiveRecord::Base
     orders.present?
   end
 
-  def is_seller?
-    market_places.present?
-  end
-
   def has_orders?
     self.orders.empty?
   end
 
-  def has_seller_transactions?
-    return false if self.orders.empty?
 
-    self.orders.each do |order|
-      return true unless order.has_seller_transaction.nil?
-    end
-  end
 end
