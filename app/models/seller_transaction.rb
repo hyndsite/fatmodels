@@ -15,15 +15,18 @@ class SellerTransaction < ActiveRecord::Base
   belongs_to :user
   attr_accessible :order
 
-  before_save :calculate_seller_dues
-
-  def calculate_seller_dues
-    self.seller_dues = (self.order.total * 0.08).round(2)
+  def seller_dues=(value)
+    self[:seller_dues] = value
   end
 
   def seller_dues
-    self.seller_dues ||= calculate_seller_dues
-    self.seller_dues
+    self[:seller_dues] ||= calculate_seller_dues
   end
+
+  private
+
+    def calculate_seller_dues
+      self[:seller_dues] = (self.order.total * 0.08).round(2)
+    end
 
 end

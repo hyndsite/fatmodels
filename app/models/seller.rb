@@ -9,7 +9,7 @@ class Seller < DelegateClass(User)
      end
 
      def has_market_place?
-        self.has_market_places.empty?
+        self.has_market_places.blank?
      end
 
 end
